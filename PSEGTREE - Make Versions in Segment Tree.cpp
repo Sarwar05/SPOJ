@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
 #define mx 100005
 int arr[mx];
 struct Node
