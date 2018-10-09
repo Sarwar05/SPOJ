@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ll long long
 #define mx 100005
 int arr[mx];
 struct Node
@@ -63,9 +64,8 @@ int main()
     scanf("%d",&n);
     for(int i=1; i<=n; i++)
         scanf("%d",&arr[i]);
-    Node* Root = new Node();
-    build(Root,1,n);
-    root[0] = Root;
+    root[0] = new Node();
+    build(root[0],1,n);
     int q,idx,pos,v,l,r,id=0,typ;
     scanf("%d",&q);
     while(q--){
