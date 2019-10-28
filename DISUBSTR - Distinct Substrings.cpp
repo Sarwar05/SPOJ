@@ -1,27 +1,33 @@
 #include<bits/stdc++.h>
 #define mx 1002
 using namespace std;
-char str[mx];
-int pi[mx];
+int prefix(string str)
+{
+    int len = str.size();
+    vector<int> pi(len);
+    pi[0] = 0;int k = 0;
+    for(int i = 1; i<len; i++){
+        int j = pi[i-1];
+        while(j>0 && str[i]!=str[j])
+            j = pi[j-1];
+        if(str[i]==str[j]) j++;
+        pi[i] = j;
+        k = max(k,j);
+    }
+    return len-k;
+}
 int main()
 {
     int tc;
     scanf("%d",&tc);
     while(tc--){
-        scanf("%s",str);
-        int len = strlen(str);
-        int ans = 0, k;
-        for(int start = 0; start<len; start++){
-            pi[start] = 0, k = 0;
-            for(int i = 1; i<len-start; i++){
-                int j = pi[i+start-1];
-                while(j>0 && str[i+start]!=str[j+start])
-                    j = pi[j+start-1];
-                if(str[i+start]==str[j+start]) j++;
-                pi[i+start] = j;
-                k = max(k,j);
-            }
-            ans+=( len-start-k );
+        string str, tem = "";
+        cin>>str;
+        int len = str.size();
+        int ans = 0;
+        for(int i = len-1; i>=0; i--){
+            tem = str[i] + tem;
+            ans+=prefix(tem);
         }
         printf("%d\n", ans);
     }
